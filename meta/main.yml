@@ -1,0 +1,30 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: hashistack_install
+  namespace: kred
+  description: N/A
+  author: Rune Rønneseth
+  company: Kreditorforeningen
+  license: MIT
+  
+  min_ansible_version: 2.9
+  # min_ansible_container_version: 
+
+  platforms:
+  - name: ubuntu
+    versions:
+    - 22.04
+    - 20.04
+    - 18.04
+
+  galaxy_tags:
+  - hashicorp
+  - consul
+  - nomad
+  - vault
+  - boundary
+  - waypoint
+  - packer
+  - terraform

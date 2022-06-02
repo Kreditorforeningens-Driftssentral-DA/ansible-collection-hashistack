@@ -1,0 +1,33 @@
+-
+  ansible.builtin.get_url:
+    url: "https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_linux_amd64.zip"
+    dest: /opt/{{ name }}/{{ name }}.zip
+    checksum: "sha256:https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_SHA256SUMS"
+  register: archive_downloaded
+  become: false
+-
+  ansible.builtin.stat:
+    path: "{{ archive_downloaded.dest }}"
+    checksum_algorithm: sha256
+    get_checksum: yes
+  register: archive_status
+  become: false
+-
+  ansible.builtin.stat:
+    path: "{{ bin_folder }}/{{ name }}"
+  register: bin_status
+  become: false
+-
+  ansible.builtin.unarchive:
+    src: "{{ archive_downloaded.dest }}"
+    dest: "{{ bin_folder }}"
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root
+  notify: restart_service
+  become: true
+  when: |
+    force_install or
+    archive_downloaded.changed or
+    not bin_status.stat.exists

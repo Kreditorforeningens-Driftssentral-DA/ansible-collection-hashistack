@@ -1,0 +1,25 @@
+- # WORK FOLDER
+  ansible.builtin.file:
+    path: "/opt/{{ name }}"
+    state: directory
+    mode: 0750
+    group: "{{ user }}"
+    owner: "{{ user }}"
+- # CONFIG FOLDER
+  ansible.builtin.file:
+    path: "{{ config_folder }}/{{ name }}.d"
+    state: directory
+    mode: 0750
+    group: "{{ user }}"
+    owner: "{{ user }}"
+  when:
+  - config.keys() | length > 0
+- # DATA FOLDER
+  ansible.builtin.file:
+    path: "{{ data_folder }}/{{ name }}"
+    state: directory
+    mode: 0750
+    group: "{{ user }}"
+    owner: "{{ user }}"
+  when:
+  - config.keys() | length > 0

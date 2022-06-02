@@ -1,0 +1,8 @@
+- # RENDER SERVICE TEMPLATE
+  ansible.builtin.template:
+    src: "{{ name }}.service.j2"
+    dest: "{{ service_folder }}/{{ name }}.service"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 644
+  when: create_service

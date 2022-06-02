@@ -1,0 +1,17 @@
+[Unit]
+Description="HashiCorp Vault - A tool for managing secrets"
+Documentation=https://www.vaultproject.io/
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User={{ user }}
+Group={{ user }}
+ExecStart={{ bin_folder }}/{{ name }} server -config={{ config_folder }}/{{ name }}.d
+ExecReload=/bin/kill --signal HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

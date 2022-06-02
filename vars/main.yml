@@ -1,0 +1,8 @@
+# VARIABLES
+---
+name: consul
+version: '1.12.1'
+force_install: false
+
+create_service: false
+config: {}

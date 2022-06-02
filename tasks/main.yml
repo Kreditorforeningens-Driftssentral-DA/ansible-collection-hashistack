@@ -1,0 +1,29 @@
+- name: Unsupported
+  block:
+  - debug:
+      msg: "{{ ansible_os_family }} is not supported"
+  - meta: end_play
+  when:
+  - ansible_os_family | lower != 'debian'
+
+- name: Initialize
+  include_tasks: "_init_{{ ansible_os_family | lower }}.yml"
+  when: true
+
+- name: Create folders
+  include_tasks: _folders.yml
+  when: true
+
+- name: Install binary
+  include_tasks: _install.yml
+  when: true
+
+- name: Create services
+  include_tasks: _services.yml
+  when: true
+
+- name: Create config
+  include_tasks: _config.yml
+  when: true
+
+#- ansible.builtin.meta: flush_handlers

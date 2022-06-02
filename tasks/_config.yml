@@ -1,0 +1,9 @@
+ -
+  ansible.builtin.copy:
+    content: "{{ config | to_nice_json }}"
+    dest: "{{ config_folder }}/{{ name }}.d/{{ name }}.json"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+  become: true
+  when: config.keys() | length > 0

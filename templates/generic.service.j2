@@ -1,0 +1,17 @@
+[Unit]
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=-{{ config_folder }}/{{ name }}.env
+User={{ user }}
+Group={{ user }}
+ExecStart={{ bin_folder }}/{{ name }} agent -config-dir={{ config_folder }}/{{ name }}.d
+ExecReload=/bin/kill --signal HUP $MAINPID
+KillMode=process
+KillSignal=SIGTERM
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

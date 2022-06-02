@@ -1,0 +1,10 @@
+# DEFAULTS
+---
+user: root
+
+bin_folder: /usr/local/bin
+config_folder: /etc/opt
+data_folder: /var/opt
+service_folder: /etc/systemd/system # /lib/systemd/system/ -> 0644
+
+manage_service: true
