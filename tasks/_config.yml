@@ -5,5 +5,5 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0644
-  become: true
   when: config.keys() | length > 0
+  become: true

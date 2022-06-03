@@ -5,6 +5,7 @@
     mode: 0750
     group: "{{ user }}"
     owner: "{{ user }}"
+  become: true
 - # CONFIG FOLDER
   ansible.builtin.file:
     path: "{{ config_folder }}/{{ app }}.d"
@@ -14,6 +15,7 @@
     owner: "{{ user }}"
   when:
   - config.keys() | length > 0
+  become: true
 - # DATA FOLDER
   ansible.builtin.file:
     path: "{{ data_folder }}/{{ app }}"
@@ -23,3 +25,4 @@
     owner: "{{ user }}"
   when:
   - config.keys() | length > 0
+  become: true
