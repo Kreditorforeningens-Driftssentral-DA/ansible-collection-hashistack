@@ -1,7 +1,8 @@
 -
   ansible.builtin.apt:
     update_cache: yes
-    cache_valid_time: 600
+    #cache_valid_time: 300
+  changed_when: no
   become: true
 -
   ansible.builtin.apt:

@@ -7,7 +7,7 @@ After=network-online.target
 [Service]
 User={{ user }}
 Group={{ user }}
-ExecStart={{ bin_folder }}/{{ name }} server -config={{ config_folder }}/{{ name }}.d
+ExecStart={{ bin_folder }}/{{ app }} server -config={{ config_folder }}/{{ app }}.d
 ExecReload=/bin/kill --signal HUP $MAINPID
 KillMode=process
 Restart=on-failure

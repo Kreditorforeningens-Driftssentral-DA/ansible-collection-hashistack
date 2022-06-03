@@ -3,10 +3,10 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-EnvironmentFile=-{{ config_folder }}/{{ name }}.env
+EnvironmentFile=-{{ config_folder }}/{{ app }}.env
 User={{ user }}
 Group={{ user }}
-ExecStart={{ bin_folder }}/{{ name }} agent -config-dir={{ config_folder }}/{{ name }}.d
+ExecStart={{ bin_folder }}/{{ app }} agent -config-dir={{ config_folder }}/{{ app }}.d
 ExecReload=/bin/kill --signal HUP $MAINPID
 KillMode=process
 KillSignal=SIGTERM

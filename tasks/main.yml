@@ -1,10 +1,15 @@
-- name: Unsupported
+- name: Unsupported OS
   block:
   - debug:
       msg: "{{ ansible_os_family }} is not supported"
   - meta: end_play
   when:
   - ansible_os_family | lower != 'debian'
+  - true
+
+- debug:
+    msg: "Installing {{ app | upper }} (v{{ version }})"
+  when: true
 
 - name: Initialize
   include_tasks: "_init_{{ ansible_os_family | lower }}.yml"

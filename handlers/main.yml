@@ -2,4 +2,6 @@
   ansible.builtin.service:
     name: "{{ name }}"
     state: restarted
-  when: create_service
+  when:
+  - create_service
+  - ansible_service_mgr == 'systemd'

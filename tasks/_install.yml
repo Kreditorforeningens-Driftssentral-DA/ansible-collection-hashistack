@@ -1,8 +1,8 @@
 -
   ansible.builtin.get_url:
-    url: "https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_linux_amd64.zip"
-    dest: /opt/{{ name }}/{{ name }}.zip
-    checksum: "sha256:https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_SHA256SUMS"
+    url: "https://releases.hashicorp.com/{{ app }}/{{ version }}/{{ app }}_{{ version }}_linux_amd64.zip"
+    dest: /opt/{{ app }}/{{ app }}.zip
+    checksum: "sha256:https://releases.hashicorp.com/{{ app }}/{{ version }}/{{ app }}_{{ version }}_SHA256SUMS"
   register: archive_downloaded
   become: false
 -
@@ -14,7 +14,7 @@
   become: false
 -
   ansible.builtin.stat:
-    path: "{{ bin_folder }}/{{ name }}"
+    path: "{{ bin_folder }}/{{ app }}"
   register: bin_status
   become: false
 -

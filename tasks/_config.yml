@@ -1,7 +1,7 @@
  -
   ansible.builtin.copy:
     content: "{{ config | to_nice_json }}"
-    dest: "{{ config_folder }}/{{ name }}.d/{{ name }}.json"
+    dest: "{{ config_folder }}/{{ app }}.d/{{ app }}.json"
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0644
