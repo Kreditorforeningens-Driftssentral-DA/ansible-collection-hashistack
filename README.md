@@ -25,22 +25,24 @@ See https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.htm
 ```yaml
 # playbook.yml
 ---
-- hosts: all
-  roles:
-  - role: kred.hashistack_install
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  tasks:
+  - ansible.builtin.include_role:
+      name: kred.hashistack_install
     vars:
-      name: terraform
-      version: '1.2.1'
-  - role: kred.hashistack_install
-    vars:
-      name: consul
+      app: "{{ item.app }}"
+      version: "{{ item.version }}"
+      create_service: "{{ item.create_service | default(false,false) }}"
+      config: "{{ item.config | default({},false) }}"
+    loop:
+    - app: terraform
+      version: '1.2.2'
+    - app: nomad
+      version: '1.3.1'
+    - app: consul
       version: '1.12.1'
-      create_service: true
-      config:
-        datacenter: "dc1"
-        data_dir: /var/opt/consul
-        server: true
-        bootstrap_expect: 1
 ```
 
 ```bash
