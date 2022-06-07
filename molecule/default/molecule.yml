@@ -7,6 +7,11 @@ dependency:
 
 provisioner:
   name: ansible
+  playbooks:
+    converge: ./converge.yml
+    #create: ./create.yml
+    #destroy: ./destroy.yml
+    #prepare: ./prepare.yml
 
 verifier:
   name: ansible

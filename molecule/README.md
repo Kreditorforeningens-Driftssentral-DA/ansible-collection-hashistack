@@ -34,5 +34,6 @@ ansible-galaxy collection install ansible.posix
 molecule --version
 
 # Run default scenario
-molecule converte
+molecule converge
 ```
+

@@ -13,17 +13,18 @@
 
 - name: Install HashiCorp binary
   include_tasks: _install_hashistack.yml
-  when:
-  - manage_binary
-
-- name: Install CNI binaries
-  include_tasks: _install_extra_cni.yml
-  when: cni_install
+  when: manage_binary
 
 - name: Create services
   include_tasks: _services.yml
+  when: manage_service
 
 - name: Create config
   include_tasks: _config.yml
+  when: manage_config
+
+- name: Extra - install cni-plugins
+  include_tasks: _install_extra_cni.yml
+  when: cni_install
 
 - ansible.builtin.meta: flush_handlers

@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  roles: []
+  
+  tasks:
+  - ansible.builtin.debug:
+      msg: Running playbook!

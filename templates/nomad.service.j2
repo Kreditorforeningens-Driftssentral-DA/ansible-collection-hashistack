@@ -5,8 +5,8 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-User={{ user }}
-Group={{ user }}
+User={{ app_user }}
+Group={{ app_user }}
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ folder_binary }}/{{ app_name }} agent -config {{ folder_config }}/{{ app_name }}.d
 KillMode=process
