@@ -23,7 +23,7 @@ driver:
       ansible_connection: docker
 
 platforms:
-- name: mlc-ubuntu-docker
+- name: mlc-consul-docker
   image: ubuntu:jammy
   tmpfs:
   - /run
@@ -37,15 +37,9 @@ platforms:
   privileged: false
   #pre_build_image true
   exposed_ports:
-  - "4646/tcp" # Nomad API/UI
-  - "8200/tcp" # Vault API/UI
   - "8500/tcp" # Consul API/UI
-  - "9200/tcp" # Boundary Controller
-  - "9202/tcp" # Boundary Agent
-  - "9702/tcp" # Waypoint UI
   published_ports:
   - "0.0.0.0:8500:8500/tcp"
-  - "0.0.0.0:4646:4646/tcp"
 
 scenario:
   create_sequence:

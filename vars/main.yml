@@ -1,8 +1,13 @@
 # VARIABLES
 ---
-app: consul
-version: '1.12.1'
+manage_binary: true
+manage_config: false
+manage_service: false
 
-force_install: false
-create_service: false
-config: {}
+app_name: terraform
+app_version: '1.2.2'
+app_force_install: false
+app_config: {}
+
+cni_install: false
+cni_version: '1.1.1'

@@ -1,9 +1,9 @@
  -
   ansible.builtin.copy:
-    content: "{{ config | to_nice_json }}"
-    dest: "{{ config_folder }}/{{ app }}.d/{{ app }}.json"
-    owner: "{{ user }}"
-    group: "{{ user }}"
+    content: "{{ app_config | to_nice_json }}"
+    dest: "{{ folder_config }}/{{ app_name }}.d/{{ app_name }}.json"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
     mode: 0644
-  when: config.keys() | length > 0
+  when: app_config.keys() | length > 0
   become: true

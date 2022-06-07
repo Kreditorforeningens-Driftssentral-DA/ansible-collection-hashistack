@@ -1,7 +1,11 @@
 # DEFAULTS
 ---
-user: root
-bin_folder: /usr/local/bin
-config_folder: /etc/opt
-data_folder: /var/opt
-service_folder: /etc/systemd/system # /lib/systemd/system/ -> 0644
+# Permissions
+app_user: root
+
+# Folders
+folder_binary: /usr/local/bin
+folder_config: /etc/opt
+folder_data: /var/opt
+folder_service: /etc/systemd/system
+folder_cni: /opt/cni

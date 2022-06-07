@@ -30,6 +30,7 @@ python3 -m pip install --upgrade ansible-core ansible-lint
 python3 -m pip install --upgrade paramiko lxml molecule molecule-docker
 ansible-galaxy collection install community.general
 ansible-galaxy collection install community.docker
+ansible-galaxy collection install ansible.posix
 molecule --version
 
 # Run default scenario

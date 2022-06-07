@@ -3,5 +3,5 @@
     name: "{{ name }}"
     state: restarted
   when:
-  - create_service
+  - manage_service
   - ansible_service_mgr == 'systemd'

@@ -1,34 +1,29 @@
-- name: Unsupported OS
-  block:
-  - debug:
-      msg: "{{ ansible_os_family }} is not supported"
-  - meta: end_play
-  when:
-  - ansible_os_family | lower != 'debian'
-  - true
+- name: assert
+  include_tasks: "_assert.yml"
 
 - debug:
-    msg: "Installing {{ app | upper }} (v{{ version }})"
+    msg: "Installing {{ app_name | default('N/A',true) | upper }} (v{{ app_version | default('N/A',true) }})"
   when: true
 
 - name: Initialize
-  include_tasks: "_init_{{ ansible_os_family | lower }}.yml"
-  when: true
+  include_tasks: "_install_{{ ansible_os_family | lower }}.yml"
 
 - name: Create folders
   include_tasks: _folders.yml
-  when: true
 
-- name: Install binary
-  include_tasks: _install.yml
-  when: true
+- name: Install HashiCorp binary
+  include_tasks: _install_hashistack.yml
+  when:
+  - manage_binary
+
+- name: Install CNI binaries
+  include_tasks: _install_extra_cni.yml
+  when: cni_install
 
 - name: Create services
   include_tasks: _services.yml
-  when: true
 
 - name: Create config
   include_tasks: _config.yml
-  when: true
 
-#- ansible.builtin.meta: flush_handlers
+- ansible.builtin.meta: flush_handlers

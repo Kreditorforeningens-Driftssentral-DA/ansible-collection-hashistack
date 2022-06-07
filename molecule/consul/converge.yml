@@ -1,21 +1,12 @@
 ---
 - name: Converge
   hosts: all
-  #become: true
   gather_facts: true
 
   # play-level roles
   roles: []
  
   tasks:
-  - # task level roles (dynamic)
-    name: "Terraform"
-    include_role:
-      name: ansible-role-hashistack-install
-    vars:
-      app_name: terraform
-      app_version: '1.2.2'
-    tags: terraform
   -
     name: "Consul"
     include_role:
@@ -39,12 +30,4 @@
           grpc: 8502
         connect:
           enabled: true
-    tags: consul
-  -
-    name: "Nomad"
-    include_role:
-      name: ansible-role-hashistack-install
-    vars:
-      app_name: nomad
-      app_version: '1.3.1'
-    tags: nomad
+  

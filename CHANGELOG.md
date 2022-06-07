@@ -1,8 +1,9 @@
 # CHANGELOG
 
 ## Unreleased
+
 FEATURES
-  * Install any hashicorp application (except Vagrant)
-  * Render yaml-config as json
-  * Create service definition(s)
+  * Optional: Install any hashicorp application (except Vagrant)
+  * Optional: Render yaml-config as json
+  * Optional: Create service definition(s)
   * Basic molecule tests (docker)

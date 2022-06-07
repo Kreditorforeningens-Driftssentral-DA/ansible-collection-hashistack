@@ -1,28 +1,28 @@
 - # WORK FOLDER
   ansible.builtin.file:
-    path: "/opt/{{ app }}"
+    path: "/opt/{{ app_name }}"
     state: directory
     mode: 0750
-    group: "{{ user }}"
-    owner: "{{ user }}"
+    group: "{{ app_user }}"
+    owner: "{{ app_user }}"
   become: true
 - # CONFIG FOLDER
   ansible.builtin.file:
-    path: "{{ config_folder }}/{{ app }}.d"
+    path: "{{ folder_config }}/{{ app_name }}.d"
     state: directory
     mode: 0750
-    group: "{{ user }}"
-    owner: "{{ user }}"
+    group: "{{ app_user }}"
+    owner: "{{ app_user }}"
   when:
-  - config.keys() | length > 0
+  - app_config.keys() | length > 0
   become: true
 - # DATA FOLDER
   ansible.builtin.file:
-    path: "{{ data_folder }}/{{ app }}"
+    path: "{{ folder_data }}/{{ app_name }}"
     state: directory
     mode: 0750
-    group: "{{ user }}"
-    owner: "{{ user }}"
+    group: "{{ app_user }}"
+    owner: "{{ app_user }}"
   when:
-  - config.keys() | length > 0
+  - app_config.keys() | length > 0
   become: true

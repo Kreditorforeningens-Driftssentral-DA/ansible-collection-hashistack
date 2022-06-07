@@ -1,0 +1,60 @@
+-
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}/bin"
+    owner: root
+    group: root
+    mode: '0755'
+    state: directory
+  loop:
+  - "{{ folder_cni }}"
+-
+  become: true
+  ansible.builtin.get_url:
+    url: "https://github.com/containernetworking/plugins/releases/download/v{{  cni_version }}/cni-plugins-linux-amd64-v{{  cni_version }}.tgz"
+    dest: "{{ folder_cni }}/cni-plugins-v{{ cni_version }}.tgz"
+    checksum: "sha1:https://github.com/containernetworking/plugins/releases/download/v{{ cni_version }}/cni-plugins-linux-amd64-v{{ cni_version }}.tgz.sha1"
+    mode: '0644'
+    timeout: 300
+  register: cni_download_result
+  until: cni_download_result is succeeded
+-
+  become: true
+  ansible.builtin.stat:
+    path: "{{ cni_download_result.dest }}"
+    checksum_algorithm: sha256
+    get_checksum: yes
+  register: cni_archive_status
+-
+  ansible.builtin.unarchive:
+    src: "{{ cni_download_result.dest }}"
+    dest: "{{ folder_cni }}/bin"
+    owner: root
+    group: root
+    mode: '0755'
+    remote_src: true
+  loop:
+-
+  block:
+  -
+    become: true
+    community.general.modprobe:
+      name: "{{ item.name }}"
+      state: "{{ item.state | default('present') }}"
+    loop: # /etc/modules-load.d/br_netfilter.conf
+    - name: br_netfilter
+  -
+    become: true
+    ansible.posix.sysctl:
+      name: "{{ item.name }}"
+      value: "{{ item.value | default('1') }}"
+      state: "{{ item.state | default('present') }}"
+      sysctl_file: /etc/sysctl.d/50-hashistack-cni.conf
+      reload: true
+    loop:
+    - name: net.bridge.bridge-nf-call-arptables
+    - name: net.bridge.bridge-nf-call-ip6tables
+    - name: net.bridge.bridge-nf-call-iptables
+  when:
+  - cni_install
+  - ansible_service_mgr == 'systemd'
