@@ -18,6 +18,10 @@ galaxy_info:
     #- jammy # See https://github.com/ansible/galaxy/issues/2918
     - bionic
     - focal
+  - name: Debian
+    versions:
+    - bullseye
+    - buster
 
   galaxy_tags:
   - hashicorp

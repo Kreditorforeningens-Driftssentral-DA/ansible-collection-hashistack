@@ -29,7 +29,7 @@ driver:
 
 platforms:
 - name: mlc-ubuntu-docker
-  image: ubuntu:jammy
+  image: debian:bullseye #ubuntu:jammy
   tmpfs:
   - /run
   - /tmp

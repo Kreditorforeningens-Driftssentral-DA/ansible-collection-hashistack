@@ -4,17 +4,17 @@ Install, configure & create service definition for HashiCorp applications. Each 
 
 # Support matrix
 
-| Name            | Binary | Config | Service | Description | 
-| :--             | :-:    | :-:    | :-:     | :--         |
-| Boundary        | X | X | X | https://www.boundaryproject.io/ |
-| Consul          | X | X | X | https://www.consul.io/ |
-| Consul-Template | X | - | - | https://github.com/hashicorp/consul-template |
-| Nomad           | X | X | X | https://www.nomadproject.io/ |
-| Packer          | X | - | - | https://www.packer.io/ |
-| Terraform       | X | - | - | https://www.terraform.io/ |
-| Vagrant         | - | - | - | https://www.vagrantup.com/ |
-| Vault           | X | X | X | https://www.vaultproject.io/ |
-| Waypoint        | X | X | X | https://www.waypointproject.io/ |
+| Name            | Variable  | Binary | Config | Service | Description | 
+| :--             | :--            |:-:    | :-:    | :-:     | :--         |
+| Boundary        | boundary       | X | X | X | https://www.boundaryproject.io/ |
+| Consul          | consul         | X | X | X | https://www.consul.io/ |
+| Consul-Template | consul-template| X | - | - | https://github.com/hashicorp/consul-template |
+| Nomad           | nomad          | X | X | X | https://www.nomadproject.io/ |
+| Packer          | packer         | X | - | - | https://www.packer.io/ |
+| Terraform       | terraform      | X | - | - | https://www.terraform.io/ |
+| Vagrant         | N/A            | - | - | - | https://www.vagrantup.com/ |
+| Vault           | vault          | X | X | X | https://www.vaultproject.io/ |
+| Waypoint        | waypoint       | X | X | X | https://www.waypointproject.io/ |
 
 
 ## Requirements
