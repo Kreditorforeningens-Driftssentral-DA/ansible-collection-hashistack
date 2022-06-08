@@ -16,15 +16,18 @@
       app_name: terraform
       app_version: '1.2.2'
     tags: terraform
+    when: false
   -
     name: "Consul"
     include_role:
       name: ansible-role-hashistack-install
     vars:
+      manage_binary: false
+      manage_service: true
+      manage_config: true
+      cni_install: true
       app_name: consul
       app_version: '1.12.2'
-      manage_service: true
-      cni_install: true
       app_config:
         datacenter: dc1
         data_dir: /var/opt/consul
@@ -48,3 +51,4 @@
       app_name: nomad
       app_version: '1.3.1'
     tags: nomad
+    when: false

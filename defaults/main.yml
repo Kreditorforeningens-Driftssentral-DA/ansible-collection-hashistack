@@ -9,3 +9,16 @@ folder_config: /etc/opt
 folder_data: /var/opt
 folder_service: /etc/systemd/system
 folder_cni: /opt/cni
+
+# Filename(s)
+manage_config_file: "{{ app_name }}"
+
+# Asserts
+allowed_applications:
+- boundary
+- consul
+- nomad
+- packer
+- terraform
+- vault
+- waypoint

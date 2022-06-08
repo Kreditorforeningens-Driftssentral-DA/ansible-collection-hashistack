@@ -2,28 +2,25 @@
   include_tasks: "_assert.yml"
 
 - debug:
-    msg: "Installing {{ app_name | default('N/A',true) | upper }} (v{{ app_version | default('N/A',true) }})"
+    msg: "Application: {{ app_name | default('N/A',true) | upper }} (v{{ app_version | default('N/A',true) }})"
   when: true
 
 - name: Initialize
   include_tasks: "_install_{{ ansible_os_family | lower }}.yml"
 
-- name: Create folders
-  include_tasks: _folders.yml
-
-- name: Install HashiCorp binary
+- name: Manage Binary
   include_tasks: _install_hashistack.yml
   when: manage_binary
 
-- name: Create services
+- name: Manage Service
   include_tasks: _services.yml
   when: manage_service
 
-- name: Create config
+- name: Manage COnfiguration
   include_tasks: _config.yml
   when: manage_config
 
-- name: Extra - install cni-plugins
+- name: Extra - CNI-plugins
   include_tasks: _install_extra_cni.yml
   when: cni_install
 

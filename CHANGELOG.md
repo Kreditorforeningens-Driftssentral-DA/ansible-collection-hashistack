@@ -1,9 +1,10 @@
 # CHANGELOG
 
 ## Unreleased
-
-FEATURES
+NEW FEATURES
   * Optional: Install any hashicorp application (except Vagrant)
   * Optional: Render yaml-config as json
   * Optional: Create service definition(s)
-  * Basic molecule tests (docker)
+
+CHANGES
+  * Added Molecule tests (docker) for vault, nomad & consul

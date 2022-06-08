@@ -23,6 +23,7 @@
       app_name: consul
       manage_binary: false
       manage_config: true
+      manage_config_file: config
       app_config:
         datacenter: dc1
         data_dir: /var/opt/consul

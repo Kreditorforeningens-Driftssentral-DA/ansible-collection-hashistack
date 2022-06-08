@@ -28,9 +28,12 @@ python3 -m venv ${TARGET_VENV}
 python3 -m pip install --upgrade pip wheel
 python3 -m pip install --upgrade ansible-core ansible-lint
 python3 -m pip install --upgrade paramiko lxml molecule molecule-docker
+
+# Install ansible collections
+ansible-galaxy collection install ansible.posix
 ansible-galaxy collection install community.general
 ansible-galaxy collection install community.docker
-ansible-galaxy collection install ansible.posix
+ansible-galaxy collection install community.vagrant
 molecule --version
 
 # Run default scenario

@@ -5,7 +5,7 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-EnvironmentFile=-{{ folder_config }}/{{ app_name }}.env
+EnvironmentFile=-{{ folder_config }}/{{ app_name }}.d/{{ app_name }}.env
 User={{ app_user }}
 Group={{ app_user }}
 ExecStart={{ folder_binary }}/{{ app_name }} agent -config-dir={{ folder_config }}/{{ app_name }}.d

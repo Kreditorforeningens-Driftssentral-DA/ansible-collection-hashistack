@@ -1,29 +1,21 @@
 ---
 -
-  name: ASSERTING APPLICATION NAME
+  name: Assert application is supported
   block:
   - ansible.builtin.set_fact:
       app_is_valid: "{{ app_name in allowed_applications }}"
-    vars:
-      allowed_applications:
-      - terraform
-      - consul
-      - nomad
-      - vault
-      - boundary
-      - waypoint
   -
     block:
     - ansible.builtin.debug:
-        msg: "{{ app_name | upper }} is not a supported hashistack application!"
+        msg: "'{{ app_name }}' is not a supported hashistack application. Allowed: {{ allowed_applications | join(', ') }}"
     - ansible.builtin.meta: end_play
     when:
     - not app_is_valid
 -
-  name: ASSERTING OS FAMILY
+  name: Assert OS is supported
   block:
   - ansible.builtin.debug:
-      msg: "{{ ansible_os_family | upper }} is not a supported OS-family!"
+      msg: "{{ ansible_os_family | upper }} is not a supported OS-family."
   - ansible.builtin.meta: end_play
-  when:
-  - ansible_os_family | lower != 'debian'
+  when: |
+    ansible_os_family | lower != 'debian'

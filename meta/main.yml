@@ -4,7 +4,7 @@ dependencies: []
 galaxy_info:
   role_name: hashistack_install
   namespace: kred
-  description: N/A
+  description: Install and configure HashiCorp applications
   author: Rune Rønneseth
   company: Kreditorforeningen
   license: MIT
@@ -21,10 +21,10 @@ galaxy_info:
 
   galaxy_tags:
   - hashicorp
+  - boundary
   - consul
   - nomad
-  - vault
-  - boundary
-  - waypoint
   - packer
   - terraform
+  - vault
+  - waypoint

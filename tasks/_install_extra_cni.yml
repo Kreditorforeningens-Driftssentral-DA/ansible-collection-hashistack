@@ -1,13 +1,11 @@
 -
   become: true
   ansible.builtin.file:
-    path: "{{ item }}/bin"
+    path: "{{ folder_cni }}/bin"
     owner: root
     group: root
     mode: '0755'
     state: directory
-  loop:
-  - "{{ folder_cni }}"
 -
   become: true
   ansible.builtin.get_url:
@@ -26,6 +24,7 @@
     get_checksum: yes
   register: cni_archive_status
 -
+  become: true
   ansible.builtin.unarchive:
     src: "{{ cni_download_result.dest }}"
     dest: "{{ folder_cni }}/bin"
@@ -33,7 +32,6 @@
     group: root
     mode: '0755'
     remote_src: true
-  loop:
 -
   block:
   -

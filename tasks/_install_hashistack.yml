@@ -1,5 +1,13 @@
 -
   become: true
+  ansible.builtin.file:
+    path: "/opt/{{ app_name }}"
+    state: directory
+    mode: 0750
+    group: "{{ app_user }}"
+    owner: "{{ app_user }}"
+-
+  become: true
   ansible.builtin.get_url:
     url: "https://releases.hashicorp.com/{{ app_name }}/{{ app_version }}/{{ app_name }}_{{ app_version }}_linux_amd64.zip"
     dest: /opt/{{ app_name }}/{{ app_name }}.zip
