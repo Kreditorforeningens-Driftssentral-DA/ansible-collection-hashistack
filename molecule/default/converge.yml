@@ -9,7 +9,7 @@
  
   tasks:
   - # task level roles (dynamic)
-    name: "Terraform"
+    name: Terraform
     include_role:
       name: ansible-role-hashistack-install
     vars:
@@ -18,7 +18,7 @@
     tags: terraform
     when: true
   -
-    name: "Consul"
+    name: Consul
     include_role:
       name: ansible-role-hashistack-install
     vars:
@@ -44,7 +44,7 @@
           enabled: true
     tags: consul
   -
-    name: "Nomad"
+    name: Nomad
     include_role:
       name: ansible-role-hashistack-install
     vars:

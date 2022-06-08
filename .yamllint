@@ -19,17 +19,21 @@ rules:
   comments-indentation: disable
   document-start: disable
   empty-lines:
-    max: 3
+    max: 1
     level: error
   hyphens:
     level: error
-  indentation: disable
+  indentation:
+    spaces: 2
+    indent-sequences: false
+    check-multi-line-strings: true
   key-duplicates: enable
+  key-ordering: disable
   line-length: disable
-  new-line-at-end-of-file: disable
+  new-line-at-end-of-file: enable
   new-lines:
     type: unix
-  trailing-spaces: disable
+  trailing-spaces: enable
   truthy: disable
 
 #skip_list:

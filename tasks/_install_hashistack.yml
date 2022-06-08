@@ -35,19 +35,3 @@
 -
   name: flush handlers
   ansible.builtin.meta: flush_handlers
-
-#-
-#  name: unarchive application
-#  become: true
-#  ansible.builtin.unarchive:
-#    src: "{{ archive_downloaded.dest }}"
-#    dest: "{{ folder_binary }}"
-#    remote_src: yes
-#    mode: 0755
-#    owner: root
-#    group: root
-#  notify: restart_service
-#  when: |
-#    app_force_install or
-#    not bin_status.stat.exists
-  #archive_downloaded.changed or

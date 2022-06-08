@@ -8,14 +8,14 @@ galaxy_info:
   author: Rune Rønneseth
   company: Kreditorforeningen
   license: MIT
-  
+
   min_ansible_version: '2.9'
-  # min_ansible_container_version: 
+  # min_ansible_container_version:
 
   platforms:
   - name: Ubuntu
     versions:
-    - jammy
+    #- jammy # See https://github.com/ansible/galaxy/issues/2918
     - bionic
     - focal
 

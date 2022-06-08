@@ -4,7 +4,7 @@
     app_is_valid: "{{ app_name in allowed_applications }}"
 -
   name: app_name not supported info
-  block: 
+  block:
   - name: app_name not in allowed_applications list message
     ansible.builtin.debug:
       msg: "'{{ app_name }}' is not a supported hashistack application. Allowed: {{ allowed_applications | join(', ') }}"

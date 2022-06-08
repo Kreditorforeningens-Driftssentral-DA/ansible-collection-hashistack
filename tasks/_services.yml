@@ -1,4 +1,4 @@
-- 
+-
   name: render service definition
   become: true
   ansible.builtin.template:
