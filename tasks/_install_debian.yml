@@ -1,14 +1,16 @@
 -
+  name: update apt-cache
+  become: true
   ansible.builtin.apt:
     update_cache: yes
     #cache_valid_time: 300
   changed_when: no
-  become: true
 -
+  name: install required apt-packages
+  become: true
   ansible.builtin.apt:
     pkg:
     - gnupg
     - unzip
     - curl
     state: present
-  become: true

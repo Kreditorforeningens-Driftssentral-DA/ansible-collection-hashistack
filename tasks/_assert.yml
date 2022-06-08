@@ -1,21 +1,24 @@
 ---
+- name: assert app_name variable
+  ansible.builtin.set_fact:
+    app_is_valid: "{{ app_name in allowed_applications }}"
 -
-  name: Assert application is supported
-  block:
-  - ansible.builtin.set_fact:
-      app_is_valid: "{{ app_name in allowed_applications }}"
-  -
-    block:
-    - ansible.builtin.debug:
-        msg: "'{{ app_name }}' is not a supported hashistack application. Allowed: {{ allowed_applications | join(', ') }}"
-    - ansible.builtin.meta: end_play
-    when:
-    - not app_is_valid
+  name: app_name not supported info
+  block: 
+  - name: app_name not in allowed_applications list message
+    ansible.builtin.debug:
+      msg: "'{{ app_name }}' is not a supported hashistack application. Allowed: {{ allowed_applications | join(', ') }}"
+  - name: exit playbook
+    ansible.builtin.meta: end_play
+  when:
+  - not app_is_valid
 -
-  name: Assert OS is supported
+  name: assert os family
   block:
-  - ansible.builtin.debug:
+  - name: os family not supported message
+    ansible.builtin.debug:
       msg: "{{ ansible_os_family | upper }} is not a supported OS-family."
-  - ansible.builtin.meta: end_play
+  - name: exit playbook
+    ansible.builtin.meta: end_play
   when: |
     ansible_os_family | lower != 'debian'

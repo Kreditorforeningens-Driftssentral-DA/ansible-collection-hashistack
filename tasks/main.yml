@@ -1,27 +1,30 @@
-- name: assert
+-
+  name: assert
   include_tasks: "_assert.yml"
-
-- debug:
-    msg: "Application: {{ app_name | default('N/A',true) | upper }} (v{{ app_version | default('N/A',true) }})"
+-
+  name: print role info
+  ansible.builtin.debug:
+    msg: "Application: {{ app_name | default('N/A',true) | upper }}"
   when: true
-
-- name: Initialize
+-
+  name: initialize os
   include_tasks: "_install_{{ ansible_os_family | lower }}.yml"
-
-- name: Manage Binary
+-
+  name: include binary tasks
   include_tasks: _install_hashistack.yml
   when: manage_binary
-
-- name: Manage Service
+-
+  name: include service tasks
   include_tasks: _services.yml
   when: manage_service
-
-- name: Manage COnfiguration
+-
+  name: include configuration tasks
   include_tasks: _config.yml
   when: manage_config
-
-- name: Extra - CNI-plugins
+-
+  name: include extra tasks - cni plugins
   include_tasks: _install_extra_cni.yml
   when: cni_install
-
-- ansible.builtin.meta: flush_handlers
+-
+  name: flush handlers
+  ansible.builtin.meta: flush_handlers

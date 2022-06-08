@@ -43,4 +43,4 @@
   
   - ansible.builtin.shell:
       cmd: nohup /usr/local/bin/nomad agent -config /etc/opt/nomad.d &
-    when: true
+    when: false

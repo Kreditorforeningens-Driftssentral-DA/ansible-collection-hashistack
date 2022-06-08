@@ -1,4 +1,5 @@
 -
+  name: create application folder
   become: true
   ansible.builtin.file:
     path: "/opt/{{ app_name }}"
@@ -7,6 +8,7 @@
     group: "{{ app_user }}"
     owner: "{{ app_user }}"
 -
+  name: download archive "v{{ app_version }}"
   become: true
   ansible.builtin.get_url:
     url: "https://releases.hashicorp.com/{{ app_name }}/{{ app_version }}/{{ app_name }}_{{ app_version }}_linux_amd64.zip"
@@ -16,29 +18,36 @@
     timeout: 300
   register: archive_downloaded
   until: archive_downloaded is succeeded
+  notify: unarchive_application
 -
-  become: true
-  ansible.builtin.stat:
-    path: "{{ archive_downloaded.dest }}"
-    checksum_algorithm: sha256
-    get_checksum: yes
-  register: archive_status
--
-  become: true
+  name: get binary status
   ansible.builtin.stat:
     path: "{{ folder_binary }}/{{ app_name }}"
   register: bin_status
 -
-  become: true
-  ansible.builtin.unarchive:
-    src: "{{ archive_downloaded.dest }}"
-    dest: "{{ folder_binary }}"
-    remote_src: yes
-    mode: 0755
-    owner: root
-    group: root
-  notify: restart_service
+  name: check if installation is required
+  ansible.builtin.debug:
+    msg: Unarchiving application
+  notify: unarchive_application
   when: |
     app_force_install or
-    archive_downloaded.changed or
     not bin_status.stat.exists
+-
+  name: flush handlers
+  ansible.builtin.meta: flush_handlers
+
+#-
+#  name: unarchive application
+#  become: true
+#  ansible.builtin.unarchive:
+#    src: "{{ archive_downloaded.dest }}"
+#    dest: "{{ folder_binary }}"
+#    remote_src: yes
+#    mode: 0755
+#    owner: root
+#    group: root
+#  notify: restart_service
+#  when: |
+#    app_force_install or
+#    not bin_status.stat.exists
+  #archive_downloaded.changed or

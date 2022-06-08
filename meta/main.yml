@@ -9,15 +9,15 @@ galaxy_info:
   company: Kreditorforeningen
   license: MIT
   
-  min_ansible_version: 2.9
+  min_ansible_version: '2.9'
   # min_ansible_container_version: 
 
   platforms:
-  - name: ubuntu
+  - name: Ubuntu
     versions:
-    - 22.04
-    - 20.04
-    - 18.04
+    - jammy
+    - bionic
+    - focal
 
   galaxy_tags:
   - hashicorp

@@ -1,4 +1,16 @@
-- name: restart_service
+-
+  name: unarchive_application
+  become: true
+  ansible.builtin.unarchive:
+    src: "{{ archive_downloaded.dest }}"
+    dest: "{{ folder_binary }}"
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root
+-
+  name: restart_service
+  become: true
   ansible.builtin.service:
     name: "{{ name }}"
     state: restarted
