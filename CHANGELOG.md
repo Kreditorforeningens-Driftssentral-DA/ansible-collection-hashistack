@@ -2,11 +2,13 @@
 
 ## Unreleased
 CHANGES
+  * Added support for consul-template (oops)
+---
+## v0.0.2
+CHANGES
   * Fixed linting-errors (incl. moved unarchiving-task to handler)
   * Removed unused tasks
-
 ---
-
 ## v0.0.1 (2022-06-08)
 NEW FEATURES
   * Optional: Install any hashicorp application (except Vagrant)

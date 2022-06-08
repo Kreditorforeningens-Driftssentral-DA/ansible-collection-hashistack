@@ -16,6 +16,15 @@
       app_name: terraform
       app_version: '1.2.2'
     tags: terraform
+    when: false
+  -
+    name: Consul template
+    include_role:
+      name: ansible-role-hashistack-install
+    vars:
+      app_name: consul-template
+      app_version: '0.29.0'
+    tags: consul-template
     when: true
   -
     name: Consul
@@ -51,4 +60,4 @@
       app_name: nomad
       app_version: '1.3.1'
     tags: nomad
-    when: true
+    when: false

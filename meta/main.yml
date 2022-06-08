@@ -25,6 +25,7 @@ galaxy_info:
   - consul
   - nomad
   - packer
+  - template
   - terraform
   - vault
   - waypoint

@@ -17,6 +17,7 @@ manage_config_file: "{{ app_name }}"
 allowed_applications:
 - boundary
 - consul
+- consul-template
 - nomad
 - packer
 - terraform
