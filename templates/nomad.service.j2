@@ -5,10 +5,10 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-User={{ app_user }}
-Group={{ app_user }}
+User={{ hashistack_user }}
+Group={{ hashistack_group }}
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart={{ folder_binary }}/{{ app_name }} agent -config {{ folder_config }}/{{ app_name }}.d
+ExecStart={{ folder_binary }}/{{ hashistack.name }} agent -config {{ folder_config }}/{{ hashistack.name }}.d
 KillMode=process
 KillSignal=SIGINT
 LimitNOFILE=65536

@@ -1,0 +1,39 @@
+# INSTALL
+---
+-
+  name: HASHISTACK | Create application folder
+  become: true
+  ansible.builtin.file:
+    path: "/opt/{{ hashistack.name }}"
+    state: directory
+    mode: 0750
+    group: "{{ hashistack_group }}"
+    owner: "{{ hashistack_user }}"
+- # Download requested version only if SHA is different
+  name: HASHISTACK | Download archive
+  become: true
+  ansible.builtin.get_url:
+    url: "https://releases.hashicorp.com/{{ hashistack.name }}/{{ hashistack.version }}/{{ hashistack.name }}_{{ hashistack.version }}_linux_amd64.zip"
+    dest: /opt/{{ hashistack.name }}/{{ hashistack.name }}.zip
+    checksum: "sha256:https://releases.hashicorp.com/{{ hashistack.name }}/{{ hashistack.version }}/{{ hashistack.name }}_{{ hashistack.version }}_SHA256SUMS"
+    mode: 0644
+    timeout: 300
+  register: archive_downloaded
+  until: archive_downloaded is succeeded
+  notify: unarchive_application
+- # Check if binary exists (regardless of version)
+  name: HASHISTACK | Check binary status
+  ansible.builtin.stat:
+    path: "{{ folder_binary }}/{{ hashistack.name }}"
+  register: bin_status
+- # If correct version is already downloaded, trigger installation if not extracted or forced installation
+  name: HASHISTACK | Check if installation is incomplete/forced
+  ansible.builtin.debug:
+    msg: "Installation required: {{ hashistack.name }} v{{ hashistack.version }}"
+  notify: unarchive_application
+  when: |
+    hashistack.force | default(false) or
+    not bin_status.stat.exists
+-
+  name: HASHISTACK | Flush handlers
+  ansible.builtin.meta: flush_handlers

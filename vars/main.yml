@@ -1,13 +1,9 @@
 # VARIABLES
 ---
-manage_binary: true
-manage_config: false
-manage_service: false
-
-app_name: terraform
-app_version: '1.2.2'
-app_force_install: false
-app_config: {}
-
-cni_install: false
-cni_version: '1.1.1'
+#hashistack:
+#  name: terraform
+#  version: '1.2.2'     # triggers _app_install
+#  config: {}           # triggers _app_configuration
+#  service: false       # triggers _app_service
+#  cni_version: '1.1.1' # triggers _cni_install
+#  force: false         # forces reinstallation

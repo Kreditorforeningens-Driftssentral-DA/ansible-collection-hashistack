@@ -1,12 +1,14 @@
+# DEBIAN
+---
 -
-  name: update apt-cache
+  name: DEBIAN | update apt-cache
   become: true
   ansible.builtin.apt:
     update_cache: yes
     #cache_valid_time: 300
   changed_when: no
 -
-  name: install required apt-packages
+  name: DEBIAN | install packages
   become: true
   ansible.builtin.apt:
     pkg:

@@ -11,30 +11,30 @@
     include_role:
       name: ansible-role-hashistack-install
     vars:
-      app_name: consul
-      app_version: '1.12.2'
-      manage_service: true
-      cni_install: true
+      hashistack:
+        name: consul
+        version: '1.12.2'
+        service: true
+        cni_version: '1.1.1'
   
   - name: "Consul Configuration"
     include_role:
       name: ansible-role-hashistack-install
     vars:
-      app_name: consul
-      manage_binary: false
-      manage_config: true
-      manage_config_file: config
-      app_config:
-        datacenter: dc1
-        data_dir: /var/opt/consul
-        server: true
-        bootstrap_expect: 1
-        client_addr: '0.0.0.0'
-        ui_config:
-          enabled: true
-        performance:
-          raft_multiplier: 8
-        ports:
-          grpc: 8502
-        connect:
-          enabled: true
+      filename_config: default
+      hashistack:
+        name: consul
+        config:
+          datacenter: dc1
+          data_dir: /var/opt/consul
+          server: true
+          bootstrap_expect: 1
+          client_addr: '0.0.0.0'
+          ui_config:
+            enabled: true
+          performance:
+            raft_multiplier: 8
+          ports:
+            grpc: 8502
+          connect:
+            enabled: true

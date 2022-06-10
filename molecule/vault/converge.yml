@@ -8,21 +8,21 @@
     include_role:
       name: ansible-role-hashistack-install
     vars:
-      app_name: vault
-      app_version: '1.10.3'
-      manage_service: true
-      manage_config: true
-      app_config:
-        ui: true
-        disable_mlock: true # Not recommended
-        storage:
-          raft:
-            path: /var/opt/vault
-            node_id: node1
-            performance_multiplier: 10
-        api_addr: http://127.0.0.1:8200
-        cluster_addr: https://127.0.0.1:8201
-        listener:
-          tcp:
-            address: '0.0.0.0:8200'
-            tls_disable: true
+      hashicluster:
+        name: vault
+        version: '1.10.3'
+        service: true
+        config:
+          ui: true
+          disable_mlock: true # Not recommended
+          storage:
+            raft:
+              path: /var/opt/vault
+              node_id: node1
+              performance_multiplier: 10
+          api_addr: http://127.0.0.1:8200
+          cluster_addr: https://127.0.0.1:8201
+          listener:
+            tcp:
+              address: '0.0.0.0:8200'
+              tls_disable: true

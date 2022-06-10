@@ -1,21 +1,22 @@
+# ASSERT
 ---
-- name: assert app_name variable
+- name: ASSERT | app_name variable
   ansible.builtin.set_fact:
-    app_is_valid: "{{ app_name in allowed_applications }}"
--
-  name: app_name not supported info
+    app_is_valid: "{{ hashistack.name in _allowed_apps }}"
+- # Only allow applications in predefined list
+  name: ASSERT | app_name not supported
   block:
   - name: app_name not in allowed_applications list message
     ansible.builtin.debug:
-      msg: "'{{ app_name }}' is not a supported hashistack application. Allowed: {{ allowed_applications | join(', ') }}"
+      msg: "'{{ hashistack.name }}' is not a supported hashistack application. Allowed: {{ _allowed_apps | join(', ') }}"
   - name: exit playbook
     ansible.builtin.meta: end_play
   when:
   - not app_is_valid
--
-  name: assert os family
+- # Only allow supported OS'es
+  name: ASSERT | os family
   block:
-  - name: os family not supported message
+  - name: ASSERT | os family not supported
     ansible.builtin.debug:
       msg: "{{ ansible_os_family | upper }} is not a supported OS-family."
   - name: exit playbook

@@ -5,9 +5,9 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-User={{ app_user }}
-Group={{ app_user }}
-ExecStart={{ folder_binary }}/{{ app_name }} server -config={{ folder_config }}/{{ app_name }}.d
+User={{ hashistack_user }}
+Group={{ hashistack_group }}
+ExecStart={{ folder_binary }}/{{ hashistack.name }} server -config={{ folder_config }}/{{ hashistack.name }}.d
 ExecReload=/bin/kill --signal HUP $MAINPID
 KillMode=process
 Restart=on-failure

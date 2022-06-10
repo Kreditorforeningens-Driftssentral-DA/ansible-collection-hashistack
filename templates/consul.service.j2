@@ -5,10 +5,10 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-EnvironmentFile=-{{ folder_config }}/{{ app_name }}.d/{{ app_name }}.env
-User={{ app_user }}
-Group={{ app_user }}
-ExecStart={{ folder_binary }}/{{ app_name }} agent -config-dir={{ folder_config }}/{{ app_name }}.d
+EnvironmentFile=-{{ folder_config }}/{{ hashistack.name }}.d/{{ hashistack.name }}.env
+User={{ hashistack_user }}
+Group={{ hashistack_group }}
+ExecStart={{ folder_binary }}/{{ hashistack.name }} agent -config-dir={{ folder_config }}/{{ hashistack.name }}.d
 ExecReload=/bin/kill --signal HUP $MAINPID
 KillMode=process
 KillSignal=SIGTERM

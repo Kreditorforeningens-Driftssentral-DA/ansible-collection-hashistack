@@ -1,0 +1,14 @@
+# SERVICES
+---
+-
+  name: HASHISTACK | Render service definition
+  become: true
+  ansible.builtin.template:
+    src: "{{ hashistack.name }}.service.j2"
+    dest: "{{ folder_service }}/{{ hashistack.name }}.service"
+    mode: 0644
+    owner: root
+    group: root
+  when:
+  - hashistack.service
+  - hashistack.name in _has_service_template

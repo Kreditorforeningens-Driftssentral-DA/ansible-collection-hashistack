@@ -1,0 +1,18 @@
+# USER
+---
+-
+  name: USER | Add group
+  become: true
+  ansible.builtin.group:
+    name: "{{ hashistack_group }}"
+    state: present
+    system: yes
+  when: hashistack_group != "root"
+- name: USER | Add user
+  become: true
+  ansible.builtin.user:
+    name: "{{ hashistack_user }}"
+    shell: /bin/bash
+    groups: "{{ hashistack_group }}"
+    append: yes
+  when: hashistack_user != "root"

@@ -1,7 +1,8 @@
 # DEFAULTS
 ---
 # Permissions
-app_user: root
+hashistack_user: root
+hashistack_group: root
 
 # Folders
 folder_binary: /usr/local/bin
@@ -11,10 +12,10 @@ folder_service: /etc/systemd/system
 folder_cni: /opt/cni
 
 # Filename(s)
-manage_config_file: "{{ app_name }}"
+filename_config: "{{ hashistack.name }}"
 
 # Asserts
-allowed_applications:
+_allowed_apps:
 - boundary
 - consul
 - consul-template
@@ -23,3 +24,8 @@ allowed_applications:
 - terraform
 - vault
 - waypoint
+
+_has_service_template:
+- consul
+- nomad
+- vault

@@ -13,17 +13,19 @@
     include_role:
       name: ansible-role-hashistack-install
     vars:
-      app_name: terraform
-      app_version: '1.2.2'
+      hashistack:
+        name: terraform
+        version: '1.2.2'
     tags: terraform
-    when: false
+    when: true
   -
     name: Consul template
     include_role:
       name: ansible-role-hashistack-install
     vars:
-      app_name: consul-template
-      app_version: '0.29.0'
+      hashistack:
+        name: consul-template
+        version: '0.29.0'
     tags: consul-template
     when: true
   -
@@ -31,33 +33,36 @@
     include_role:
       name: ansible-role-hashistack-install
     vars:
-      manage_binary: false
-      manage_service: true
-      manage_config: true
-      cni_install: true
-      app_name: consul
-      app_version: '1.12.2'
-      app_config:
-        datacenter: dc1
-        data_dir: /var/opt/consul
-        server: true
-        bootstrap_expect: 1
-        client_addr: '0.0.0.0'
-        ui_config:
-          enabled: true
-        performance:
-          raft_multiplier: 8
-        ports:
-          grpc: 8502
-        connect:
-          enabled: true
+      hashistack_user: consul
+      hashistack_group: consul
+      hashistack:
+        name: consul
+        version: '1.12.2'
+        service: true
+        cni_version: '1.1.1'
+        config:
+          datacenter: dc1
+          data_dir: /var/opt/consul
+          server: true
+          bootstrap_expect: 1
+          client_addr: '0.0.0.0'
+          ui_config:
+            enabled: true
+          performance:
+            raft_multiplier: 8
+          ports:
+            grpc: 8502
+          connect:
+            enabled: true
     tags: consul
+    when: true
   -
     name: Nomad
     include_role:
       name: ansible-role-hashistack-install
     vars:
-      app_name: nomad
-      app_version: '1.3.1'
+      hashistack:
+        name: nomad
+        version: '1.3.1'
     tags: nomad
-    when: false
+    when: true

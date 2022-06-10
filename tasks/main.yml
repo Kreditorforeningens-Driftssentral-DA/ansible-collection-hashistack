@@ -1,30 +1,38 @@
+# TASKS
+---
 -
-  name: assert
-  include_tasks: "_assert.yml"
+  name: ASSERT
+  include_tasks: _assert.yml
 -
-  name: print role info
+  name: INFO
   ansible.builtin.debug:
-    msg: "Application: {{ app_name | default('N/A',true) | upper }}"
+    msg: "Application: {{ hashistack.name | upper }}"
   when: true
 -
-  name: initialize os
-  include_tasks: "_install_{{ ansible_os_family | lower }}.yml"
+  name: OS | initialize
+  include_tasks: "_{{ ansible_os_family | lower }}.yml"
+  when: |
+    (ansible_os_family | lower) in ["debian"]
 -
-  name: include binary tasks
-  include_tasks: _install_hashistack.yml
-  when: manage_binary
+  name: HASHISTACK | User tasks
+  include_tasks: _hashistack_user.yml
+  when: true
 -
-  name: include service tasks
-  include_tasks: _services.yml
-  when: manage_service
+  name: HASHISTACK | Installation tasks
+  include_tasks: _hashistack_install.yml
+  when: hashistack.version is defined
 -
-  name: include configuration tasks
-  include_tasks: _config.yml
-  when: manage_config
+  name: HASHISTACK | Service tasks
+  include_tasks: _hashistack_services.yml
+  when: hashistack.service is defined
 -
-  name: include extra tasks - cni plugins
-  include_tasks: _install_extra_cni.yml
-  when: cni_install
+  name: HASHISTACK | Configuration tasks
+  include_tasks: _hashistack_config.yml
+  when: hashistack.config is defined
 -
-  name: flush handlers
+  name: EXTRAS | CNI plugins
+  include_tasks: _extras_cni.yml
+  when: hashistack.cni_version is defined
+-
+  name: FINALIZE | Flush handlers
   ansible.builtin.meta: flush_handlers

@@ -1,0 +1,30 @@
+# CONFIG
+---
+-
+  name: HASHISTACK | Create config folder
+  become: true
+  ansible.builtin.file:
+    path: "{{ folder_config }}/{{ hashistack.name }}.d"
+    state: directory
+    mode: 0750
+    group: "{{ hashistack_group }}"
+    owner: "{{ hashistack_user }}"
+-
+  name: HASHISTACK | Create data folder
+  become: true
+  ansible.builtin.file:
+    path: "{{ folder_data }}/{{ hashistack.name }}"
+    state: directory
+    mode: 0750
+    group: "{{ hashistack_group }}"
+    owner: "{{ hashistack_user }}"
+-
+  name: HASHISTACK | Render config to json
+  become: true
+  ansible.builtin.copy:
+    content: "{{ hashistack.config | to_nice_json }}"
+    dest: "{{ folder_config }}/{{ hashistack.name }}.d/{{ filename_config }}.json"
+    mode: 0644
+    group: "{{ hashistack_group }}"
+    owner: "{{ hashistack_user }}"
+  when: hashistack.config.keys() | length > 0

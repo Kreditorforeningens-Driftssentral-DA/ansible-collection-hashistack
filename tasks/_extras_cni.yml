@@ -1,5 +1,7 @@
+# EXTRA CNI
+---
 -
-  name: create cni folder
+  name: CNI | create folder
   become: true
   ansible.builtin.file:
     path: "{{ folder_cni }}/bin"
@@ -8,18 +10,18 @@
     mode: '0755'
     state: directory
 -
-  name: download cni archive
+  name: CNI | download archive
   become: true
   ansible.builtin.get_url:
-    url: "https://github.com/containernetworking/plugins/releases/download/v{{  cni_version }}/cni-plugins-linux-amd64-v{{  cni_version }}.tgz"
-    dest: "{{ folder_cni }}/cni-plugins-v{{ cni_version }}.tgz"
-    checksum: "sha1:https://github.com/containernetworking/plugins/releases/download/v{{ cni_version }}/cni-plugins-linux-amd64-v{{ cni_version }}.tgz.sha1"
+    url: "https://github.com/containernetworking/plugins/releases/download/v{{  hashistack.cni_version }}/cni-plugins-linux-amd64-v{{  hashistack.cni_version }}.tgz"
+    dest: "{{ folder_cni }}/cni-plugins-v{{ hashistack.cni_version }}.tgz"
+    checksum: "sha1:https://github.com/containernetworking/plugins/releases/download/v{{ hashistack.cni_version }}/cni-plugins-linux-amd64-v{{ hashistack.cni_version }}.tgz.sha1"
     mode: '0644'
     timeout: 300
   register: cni_download_result
   until: cni_download_result is succeeded
 -
-  name: check cni archive status
+  name: CNI | get archive status
   become: true
   ansible.builtin.stat:
     path: "{{ cni_download_result.dest }}"
@@ -27,7 +29,7 @@
     get_checksum: yes
   register: cni_archive_status
 -
-  name: unarchive cni application
+  name: CNI | unarchive application
   become: true
   ansible.builtin.unarchive:
     src: "{{ cni_download_result.dest }}"
@@ -37,10 +39,10 @@
     mode: '0755'
     remote_src: true
 -
-  name: configure cni
+  name: CNI | configuration
   block:
   -
-    name: configure bridge networking
+    name: CNI | bridge networking
     become: true
     community.general.modprobe:
       name: "{{ item.name }}"
@@ -48,7 +50,7 @@
     loop: # /etc/modules-load.d/br_netfilter.conf
     - name: br_netfilter
   -
-    name: configure iptables
+    name: CNI | iptables
     become: true
     ansible.posix.sysctl:
       name: "{{ item.name }}"
@@ -61,5 +63,5 @@
     - name: net.bridge.bridge-nf-call-ip6tables
     - name: net.bridge.bridge-nf-call-iptables
   when:
-  - cni_install
+  - hashistack.cni_version is defined
   - ansible_service_mgr == 'systemd'

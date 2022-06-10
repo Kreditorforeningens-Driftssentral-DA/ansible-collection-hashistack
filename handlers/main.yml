@@ -1,3 +1,5 @@
+# HANDLERS
+---
 -
   name: unarchive_application
   become: true
@@ -15,5 +17,5 @@
     name: "{{ name }}"
     state: restarted
   when:
-  - manage_service
+  - hashistack.service | default (false)
   - ansible_service_mgr == 'systemd'
